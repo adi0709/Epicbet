@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "Tests for Epicbet website",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test": "playwright test",
+    "report": "playwright test && allure serve allure-results"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/adi0709/Epicbet.git"
@@ -12,6 +15,8 @@
   "license": "ISC",
   "devDependencies": {
     "@playwright/test": "^1.49.1",
-    "@types/node": "^22.10.2"
+    "@types/node": "^22.10.2",
+    "allure-commandline": "^2.32.0",
+    "allure-playwright": "^3.0.7"
   }
 }
