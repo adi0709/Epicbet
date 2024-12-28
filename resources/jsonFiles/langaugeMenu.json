@@ -1,0 +1,37 @@
+[
+  {
+    "key":"en",
+    "text":"English",
+    "url": "sports/",
+    "loginText": "Login",
+    "signUpText": "Sign up"
+  },
+  {
+    "key":"et",
+    "text":"Eesti",
+    "url": "sport/",
+    "loginText": "Logi sisse",
+    "signUpText": "Liitu"
+  },
+  {
+    "key":"fi",
+    "text":"Suomi",
+    "url": "vedonlyonti/",
+    "loginText": "Kirjaudu",
+    "signUpText": "Liity nyt"
+  },
+  {
+    "key":"es",
+    "text":"Español",
+    "url": "deportes/",
+    "loginText": "Iniciar sesión",
+    "signUpText": "Registro"
+  },
+  {
+    "key":"is",
+    "text":"Icelandic",
+    "url": "ithrottir/",
+    "loginText": "Innskrá",
+    "signUpText": "Nýskrá"
+  }
+]

@@ -1,0 +1,27 @@
+[
+  {
+    "testId":"sports",
+    "text":"Sports",
+    "url":"/en/sports/"
+  },
+  {
+    "testId":"casino",
+    "text":"Casino",
+    "url":"/en/casino/"
+  },
+  {
+    "testId":"casino.live",
+    "text":"Live Casino",
+    "url":"/en/casino/live-lobby/"
+  },
+  {
+    "testId":"roadmap",
+    "text":"Roadmap",
+    "url":"/en/roadmap/"
+  },
+  {
+    "testId":"user.account.promotions",
+    "text":"Promotions",
+    "url":"/en/user/account/promotions/"
+  }
+]

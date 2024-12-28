@@ -1,0 +1,17 @@
+{
+  "name": "epicbet",
+  "version": "1.0.0",
+  "description": "Tests for Epicbet website",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adi0709/Epicbet.git"
+  },
+  "author": "Aditya Panwar",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.49.1",
+    "@types/node": "^22.10.2"
+  }
+}
