@@ -6,7 +6,7 @@
   "scripts": {
     "test": "playwright test",
     "report": "allure serve allure-results",
-    "test-and-report": "npm run test || true && npm run report"
+    "test-and-report": "npx playwright test --reporter=allure-playwright && npx allure generate ./allure-results --clean -o ./allure-report && npx allure open --port 5252 ./allure-report"
   },
   "repository": {
     "type": "git",

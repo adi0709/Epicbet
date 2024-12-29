@@ -1,0 +1,25 @@
+### Extra files and folders ###
+node_modules/
+/test-results/
+/blob-report/
+/playwright/.cache/
+
+### Mac OS ###
+.DS_Store
+**/*.DS_Store
+
+### IDE files ###
+.idea/
+
+### Report files ###
+allure-results/
+allure-report/
+playwright-report/
+test-results/
+
+### Github files ###
+.gitignore
+.github
+
+### Readme File ###
+README.md
