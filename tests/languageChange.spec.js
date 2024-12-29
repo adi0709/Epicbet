@@ -11,12 +11,7 @@ test.describe('Validate if the language change functionality works', () => {
     test.beforeAll(async () => {
         browser = await chromium.launch();
         // Providing geoLocation to the tests for CI to work properly
-        const context = await browser.newContext({
-            geolocation: { latitude: 59.437, longitude: 24.7535 },
-            permissions: ['geolocation'],
-            locale: 'et-EE',
-            timezoneId: 'Europe/Tallinn',
-        });
+        const context = await browser.newContext();
         page = await context.newPage();
         homePage = new HomePage(page);
     });

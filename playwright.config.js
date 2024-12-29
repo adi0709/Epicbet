@@ -14,5 +14,9 @@ export default defineConfig({
     trace: 'retain-on-first-failure',
     screenshot: 'only-on-failure',
     video: true,
+
+    // Context geolocation
+    geolocation: { latitude: 59.437, longitude: 24.7535 },
+    permissions: ['geolocation']
   }
 });
