@@ -41,7 +41,7 @@ class HomePage {
     }
 
     async validateNavigationToSite(){
-        await expect(this.page).toHaveTitle(/Epicbet/);
+        await expect(this.page).toHaveTitle(/Epicbet123/);
         await this.loginButton.isVisible();
         await this.signUpButton.isVisible();
         await this.menuButton.isVisible();

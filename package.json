@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "playwright test",
-    "report": "playwright test && allure serve allure-results"
+    "report": "allure serve allure-results",
+    "test-and-report": "npm run test || true && npm run report"
   },
   "repository": {
     "type": "git",
