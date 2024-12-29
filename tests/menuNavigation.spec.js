@@ -18,7 +18,7 @@ test.describe('Validate if navigating to different items in the navigation menu 
 
     test.beforeEach(async ({page, context}) => {
         // Adding the cookie value for gdpr to get rid of the gdpr cookie pop up
-        await homePage.setGdprCookie();
+        //await homePage.setGdprCookie();
 
         // Navigating to the website and validating the successful landing on the homepage
         await homePage.navigateToSite();
