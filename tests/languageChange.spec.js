@@ -14,7 +14,7 @@ test.describe('Validate if the language change functionality works', () => {
         homePage = new HomePage(page);
     });
 
-    test.beforeEach(async ({page, context}) => {
+    test.beforeEach(async () => {
         // Adding the cookie value for gdpr to get rid of the gdpr cookie pop up
         //await homePage.setGdprCookie();
 
