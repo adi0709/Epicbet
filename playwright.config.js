@@ -6,12 +6,13 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 1 : 0,
   workers: process.env.CI ? 4 : undefined,
-  reporter: [["dot"], ["line"], ["allure-playwright"]],
+  reporter: [["dot"], ["line"], ["html"],["allure-playwright"]],
   use: {
     baseURL: 'https://epicbet.com/',
     browserName: 'chromium',
     headless: true,
-    trace: 'on',
-    screenshot: 'only-on-failure'
+    trace: 'retain-on-first-failure',
+    screenshot: 'only-on-failure',
+    video: true,
   }
 });
