@@ -11,7 +11,7 @@ export default defineConfig({
     baseURL: 'https://epicbet.com/',
     browserName: 'chromium',
     headless: true,
-    trace: 'retain-on-failure',
+    trace: 'on',
     screenshot: 'only-on-failure'
   }
 });
