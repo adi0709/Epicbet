@@ -15,6 +15,7 @@ test.describe('Validate if the language change functionality works', () => {
             geolocation: { latitude: 59.437, longitude: 24.7535 },
             permissions: ['geolocation'],
             locale: 'et-EE',
+            timezoneId: 'Europe/Tallinn',
         });
         page = await context.newPage();
         homePage = new HomePage(page);
