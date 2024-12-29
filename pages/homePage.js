@@ -42,9 +42,9 @@ class HomePage {
 
     async validateNavigationToSite(){
         await expect(this.page).toHaveTitle(/Epicbet/);
-        await expect(this.loginButton).toBeVisible();
-        await expect(this.signUpButton).toBeVisible();
-        await expect(this.menuButton).toBeVisible();
+        await this.loginButton.isVisible();
+        await this.signUpButton.isVisible();
+        await this.menuButton.isVisible();
     }
 
     async validateLanguageMenuItems() {
@@ -91,16 +91,16 @@ class HomePage {
         // Validating the Url to change as per the change in language
         await expect(this.page).toHaveURL(`${languageCode}/${url}`);
 
-        await expect(this.loginButton).toBeVisible();
+        await this.loginButton.isVisible();
         await expect(this.loginButton).toHaveText(loginText);
 
-        await expect(this.signUpButton).toBeVisible();
+        await this.signUpButton.isVisible();
         await expect(this.signUpButton).toHaveText(signUpText);
     }
 
     async validatingMenuItem(menuId, menuText){
         const navigationItem = this.getNavigationSelectors(menuId)
-        await expect(navigationItem).toBeVisible();
+        await navigationItem.isVisible();
         await expect(navigationItem).toHaveText(menuText);
     }
 
