@@ -1,38 +1,21 @@
-import { chromium, test } from '@playwright/test';
-import HomePage from '../support/pageObjectModel/pages/HomePage';
-
+import { test } from '../support/base.fixture';
+import BaseTest from './baseTest';
 const languages = require('../resources/jsonFiles/langaugeMenu.json');
 
 test.describe('Validate if the language change functionality works', () => {
-    let browser;
-    let page;
-    let homePage;
-
-    test.beforeAll(async () => {
-        browser = await chromium.launch();
-        // Providing geoLocation to the tests for CI to work properly
-        const context = await browser.newContext();
-        page = await context.newPage();
-        homePage = new HomePage(page);
+    test.beforeEach(async ({ homePage }) => {
+        const baseTest = new BaseTest();
+        await baseTest.setup(homePage);
     });
 
-    test.beforeEach(async () => {
-        // Adding the cookie value for gdpr to get rid of the gdpr cookie pop up
-        await homePage.setGdprCookie();
-
-        // Navigating to the website
-        await homePage.navigateToSite();
-
-        // Validating the successful landing on the homepage
-        await homePage.validateNavigationToSite();
-    });
-
-    test('Validate the language menu items', async () => {
+    test('Validate the language menu items', async ({ homePage }) => {
         // Validating the language change menu has all the options
         await homePage.validateLanguageMenu();
     });
 
-    test('Validate changing of language of the website', async () => {
+    test('Validate changing of language of the website', async ({
+        homePage,
+    }) => {
         // Validating the language change functionality works for all the options available
         for (const language of languages) {
             await homePage.changeLanguage(language.key);
