@@ -1,5 +1,4 @@
 node_modules/
-/test-results/
 /blob-report/
 /playwright/.cache/
 
@@ -9,6 +8,8 @@ node_modules/
 
 .idea/
 
-### Allure files ###
+### Report files ###
 allure-results/
 allure-report/
+playwright-report/
+test-results/

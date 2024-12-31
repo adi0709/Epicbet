@@ -1,5 +1,5 @@
 import {test, chromium} from '@playwright/test';
-import HomePage from "../pages/homePage";
+import HomePage from "../support/pageObjectModel/pages/HomePage";
 const navigationMenu = require("../resources/jsonFiles/navigationMenu.json");
 const languages = require("../resources/jsonFiles/langaugeMenu.json");
 

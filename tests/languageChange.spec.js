@@ -1,7 +1,7 @@
 import { chromium, test } from '@playwright/test';
-import HomePage from "../pages/homePage";
+import HomePage from '../support/pageObjectModel/pages/HomePage';
 
-const languages = require("../resources/jsonFiles/langaugeMenu.json");
+const languages = require('../resources/jsonFiles/langaugeMenu.json');
 
 test.describe('Validate if the language change functionality works', () => {
     let browser;
@@ -25,8 +25,6 @@ test.describe('Validate if the language change functionality works', () => {
 
         // Validating the successful landing on the homepage
         await homePage.validateNavigationToSite();
-
-
     });
 
     test('Validate the language menu items', async () => {
@@ -38,7 +36,12 @@ test.describe('Validate if the language change functionality works', () => {
         // Validating the language change functionality works for all the options available
         for (const language of languages) {
             await homePage.changeLanguage(language.key);
-            await homePage.validatingLanguageChange(language.key, language.url, language.loginText, language.signUpText);
+            await homePage.validatingLanguageChange(
+                language.key,
+                language.url,
+                language.loginText,
+                language.signUpText
+            );
         }
     });
 });

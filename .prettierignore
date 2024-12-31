@@ -1,0 +1,8 @@
+**/.git
+**/node_modules
+
+### Report files ###
+allure-results/
+allure-report/
+playwright-report/
+test-results/

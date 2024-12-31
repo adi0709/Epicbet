@@ -1,6 +1,6 @@
-const {expect} = require("@playwright/test");
-const languages = require("../resources/jsonFiles/langaugeMenu.json");
-const gdprCookieData = require("../resources/jsonFiles/gdprCookie.json");
+const { expect } = require('@playwright/test');
+const languages = require('../../../resources/jsonFiles/langaugeMenu.json');
+const gdprCookieData = require('../../../resources/jsonFiles/gdprCookie.json');
 
 class HomePage {
     constructor(page, context) {
@@ -9,39 +9,41 @@ class HomePage {
 
         // Defining selectors
         this.languageButton = page.locator('[data-testid="language-button"]');
-        this.languageMenuItem = page.locator('[data-testid="language-menu"] > div');
+        this.languageMenuItem = page.locator(
+            '[data-testid="language-menu"] > div'
+        );
         this.loginButton = page.locator('[data-testid="login-button"]');
         this.signUpButton = page.locator('[data-testid="signup-button"]');
         this.menuButton = page.locator('[data-testid="menu-button"]');
+        this.searchButton = page.locator('[data-testid="search-button"]');
 
         // Define expected language items for validation
         this.expectedLanguages = languages;
-
     }
 
     // Defining Dynamic Selectors
-    getNavigationSelectors(menuId){
+    getNavigationSelectors(menuId) {
         return this.page.locator(`[data-testkey="${menuId}"]`);
     }
 
-    getLanguageSelectors(languageCode){
-        return this.page.locator(`[data-testkey="${languageCode}"]`)
+    getLanguageSelectors(languageCode) {
+        return this.page.locator(`[data-testkey="${languageCode}"]`);
     }
 
-
+    // Defining Methods
     // Creating Actions using the above selectors
     async setGdprCookie() {
-        await this.page.context().addCookies([
-            gdprCookieData
-        ]);
+        await this.page.context().addCookies([gdprCookieData]);
     }
 
     async navigateToSite() {
         await this.page.goto('/');
     }
 
-    async validateNavigationToSite(){
-        await expect(this.page).toHaveTitle(/Epicbet/);
+    async validateNavigationToSite() {
+        await expect(this.page).toHaveTitle(/Epicbet/, {
+            message: 'Expect the website to have Epicbet text in the title',
+        });
         await this.loginButton.isVisible();
         await this.signUpButton.isVisible();
         await this.menuButton.isVisible();
@@ -49,14 +51,20 @@ class HomePage {
 
     async validateLanguageMenuItems() {
         // Assert the number of menu items
-        await expect(this.languageMenuItem).toHaveCount(this.expectedLanguages.length);
+        await expect(this.languageMenuItem).toHaveCount(
+            this.expectedLanguages.length,
+            { message: `Expect the language menu to have the correct length` }
+        );
 
         // Validate each language menu item
         await Promise.all(
             this.expectedLanguages.map(async (item, index) => {
                 const menuItem = this.languageMenuItem.nth(index);
                 // Validating the key of the selectors
-                await expect(menuItem).toHaveAttribute('data-testkey', item.key);
+                await expect(menuItem).toHaveAttribute(
+                    'data-testkey',
+                    item.key
+                );
 
                 // Validating the value of the selectors
                 await expect(menuItem).toHaveText(item.text);
@@ -87,7 +95,6 @@ class HomePage {
     }
 
     async validatingLanguageChange(languageCode, url, loginText, signUpText) {
-
         // Validating the Url to change as per the change in language
         await expect(this.page).toHaveURL(`${languageCode}/${url}`);
 
@@ -98,19 +105,23 @@ class HomePage {
         await expect(this.signUpButton).toHaveText(signUpText);
     }
 
-    async validatingMenuItem(menuId, menuText){
-        const navigationItem = this.getNavigationSelectors(menuId)
+    async validatingMenuItem(menuId, menuText) {
+        const navigationItem = this.getNavigationSelectors(menuId);
         await navigationItem.isVisible();
         await expect(navigationItem).toHaveText(menuText);
     }
 
-    async visitingNavigationMenuItem(menuId){
+    async visitingNavigationMenuItem(menuId) {
         await this.getNavigationSelectors(menuId).click();
-
     }
 
-    async validatingVisitingNavigationMenuItem(url){
-        await expect(this.page).toHaveURL(`${url}`)
+    async validatingVisitingNavigationMenuItem(url) {
+        await expect(this.page).toHaveURL(`${url}`);
+    }
+
+    async clickSearchButton() {
+        await this.searchButton.isVisible();
+        await this.searchButton.click();
     }
 }
 

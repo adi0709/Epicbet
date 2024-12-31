@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "playwright test",
+    "test:html-report": "npx playwright test --reporter=html ; npx playwright show-report",
     "report": "allure serve allure-results",
-    "test-and-report": "npx playwright test --reporter=allure-playwright && npx allure generate ./allure-results --clean -o ./allure-report && npx allure open --port 5252 ./allure-report"
+    "test:allure-report": "npx playwright test --reporter=allure-playwright ; npx allure generate ./allure-results --clean -o ./allure-report ; npx allure open --port 5252 ./allure-report"
   },
   "repository": {
     "type": "git",
@@ -18,6 +19,7 @@
     "@playwright/test": "^1.49.1",
     "@types/node": "^22.10.2",
     "allure-commandline": "^2.32.0",
-    "allure-playwright": "^3.0.7"
+    "allure-playwright": "^3.0.7",
+    "prettier": "3.4.2"
   }
 }

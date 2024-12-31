@@ -39,4 +39,4 @@ RUN mkdir -p /app/allure-results /app/allure-report
 EXPOSE 5252
 
 # Run the custom npm script to execute tests, generate and open Allure reports
-CMD ["npm", "run", "test-and-report"]
+CMD ["npm", "run", "test:allure-report"]
