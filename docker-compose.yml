@@ -1,0 +1,7 @@
+services:
+  playwright-test:
+    build: .
+    ports:
+      - 5252:5252
+    volumes:
+      - ./allure-report:/app/allure-report

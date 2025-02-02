@@ -56,6 +56,14 @@ After building the Docker image, you can run the tests by executing:
 ```bash
 docker run --rm -p 5252:5252 -v $(pwd)/allure-report:/app/allure-report playwright-allure-tests
 ```
+OR
+```bash
+docker run -it -p 5252:5252 -v $(pwd)/allure-report:app/allure-report playwright-allure-tests
+```
+OR use Docker Compose functionality to build and execute the tests in a single command
+```bash
+docker compose up
+```
 
 This command does the following:
 

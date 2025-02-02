@@ -7,9 +7,6 @@ WORKDIR /app
 # Install OpenJDK (Java) and other necessary packages
 RUN apt-get update && apt-get install -y openjdk-11-jdk && apt-get clean
 
-# Check Java installation location during build
-RUN java -XshowSettings:properties -version
-
 # Set JAVA_HOME environment variable
 ENV JAVA_HOME=/usr/lib/jvm/java-11-openjdk-arm64
 ENV PATH=$JAVA_HOME/bin:$PATH
@@ -18,24 +15,15 @@ ENV PATH=$JAVA_HOME/bin:$PATH
 COPY package.json package-lock.json ./
 
 # Install npm dependencies
-RUN npm install
-
-# Install Allure command-line tool globally
-RUN npm install -g allure-commandline --save-dev
-
-# Install a simple HTTP server to serve the Allure report
-RUN npm install -g http-server
+RUN npm install && npm install -g allure-commandline --save-dev && npm install -g http-server && npm cache clean --force
 
 # Copy all files from the host machine into the container
 COPY . .
 
-# Ensure all necessary Playwright dependencies are installed
-RUN npx playwright install --with-deps
+# Ensure all necessary Playwright dependencies are installed and the necessary folders are created
+RUN npx playwright install --with-deps && mkdir -p /app/allure-results /app/allure-report
 
-# Make sure the allure-results and allure-report directories exist for report generation
-RUN mkdir -p /app/allure-results /app/allure-report
-
-# Expose Allure report port (optional if you want to access the report from Docker)
+# Expose Allure report port
 EXPOSE 5252
 
 # Run the custom npm script to execute tests, generate and open Allure reports
