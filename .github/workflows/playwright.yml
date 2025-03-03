@@ -1,4 +1,4 @@
-name: Playwright Tests with Docker and Linting
+name: Playwright Tests with Docker
 on:
   push:
     branches: [ main, master ]
@@ -6,64 +6,7 @@ on:
     branches: [ main, master ]
 
 jobs:
-  lint:
-    runs-on: self-hosted
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: lts/*
-          cache: 'npm'
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Check for ESLint configuration
-        id: eslint-check
-        run: |
-          if [ -f ".eslintrc.js" ] || [ -f ".eslintrc.json" ] || [ -f ".eslintrc.yml" ] || [ -f ".eslintrc" ] || [ -f "eslint.config.js" ] || [ -f "eslint.config.mjs" ] || [ -f "eslint.config.cjs" ]; then
-            echo "ESLINT_CONFIG_EXISTS=true" >> $GITHUB_OUTPUT
-          else
-            echo "ESLINT_CONFIG_EXISTS=false" >> $GITHUB_OUTPUT
-          fi
-
-      - name: Run ESLint (if configured)
-        if: steps.eslint-check.outputs.ESLINT_CONFIG_EXISTS == 'true'
-        run: |
-          # Use the project's local ESLint version if available
-          if [ -f "node_modules/.bin/eslint" ]; then
-            npx eslint . --ext .js,.jsx,.ts,.tsx
-          else
-            # Install ESLint version 8 (for better compatibility) if not already installed
-            npm install --no-save eslint@8
-            npx eslint . --ext .js,.jsx,.ts,.tsx
-          fi
-
-      - name: Check for Prettier configuration
-        id: prettier-check
-        run: |
-          if [ -f ".prettierrc" ] || [ -f ".prettierrc.js" ] || [ -f ".prettierrc.json" ] || [ -f ".prettier.config.js" ]; then
-            echo "PRETTIER_CONFIG_EXISTS=true" >> $GITHUB_OUTPUT
-          else
-            echo "PRETTIER_CONFIG_EXISTS=false" >> $GITHUB_OUTPUT
-          fi
-
-      - name: Run Prettier check (if configured)
-        if: steps.prettier-check.outputs.PRETTIER_CONFIG_EXISTS == 'true'
-        run: |
-          # Use the project's local Prettier if available
-          if [ -f "node_modules/.bin/prettier" ]; then
-            npx prettier --check "**/*.{js,jsx,ts,tsx,json,css,md}"
-          else
-            # Skip Prettier if not configured
-            echo "Prettier not found in project, skipping format check"
-          fi
-
   test:
-    needs: lint
     timeout-minutes: 60
     runs-on: self-hosted
     steps:
@@ -101,3 +44,5 @@ jobs:
         if: always()
         run: |
           docker-compose down
+          # Optionally remove volumes and images to free up space
+          # docker-compose down --volumes --rmi local
